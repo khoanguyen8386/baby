@@ -1,0 +1,61 @@
+/* heart.html - Trang trái tim */
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Animation</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="heart-container">
+        <canvas id="pinkboard"></canvas>
+    </div>
+    <a href="thankyou.html" class="next-button">Tiếp tục 💕</a>
+</body>
+</html>
+
+/* style.css - File CSS */
+body {
+    text-align: center;
+    background: #ffebf0;
+    font-family: Arial, sans-serif;
+}
+.container {
+    padding: 50px;
+}
+.heart-button, .next-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #ff5ca4;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+/* script.js - Hiệu ứng trái tim */
+const canvas = document.getElementById("pinkboard");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// Hàm vẽ trái tim
+function drawHeart(x, y, size) {
+    ctx.fillStyle = "#ff5ca4";
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.bezierCurveTo(x + size, y - size, x + size * 2, y + size, x, y + size * 2);
+    ctx.bezierCurveTo(x - size * 2, y + size, x - size, y - size, x, y);
+    ctx.fill();
+}
+
+setInterval(() => {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height;
+    const size = Math.random() * 20 + 10;
+    drawHeart(x, y, size);
+}, 200);
